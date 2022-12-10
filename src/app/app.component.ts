@@ -10,9 +10,9 @@ import { Table } from './model/Table'
 })
 export class AppComponent implements OnInit {
   reactiveForm = new FormGroup({
-    timer: new FormControl(''),
-    arraySize: new FormControl(''),
-    id: new FormControl(''),
+    timer: new FormControl('300'),
+    arraySize: new FormControl('100'),
+    id: new FormControl('1260'),
   })
 
   displayedColumns: string[] = ['id', 'int', 'float', 'color', 'child']
@@ -30,14 +30,20 @@ export class AppComponent implements OnInit {
       const worker = new Worker('./app.worker', { type: 'module' })
       worker.onmessage = ({ data }) => {
         this.showTable = true
-        //transform response data(raw) to class
+        //filter base on id
+        const result = data.filter((table) =>
+          table.id.includes(this.reactiveForm.value.id),
+        )
+        console.log(result)
+
+        //transform response data(raw) to Table class
         let users = plainToClass(Table, data)
         console.log(users)
 
         //set table data to render on UI
-        this.dataSource = users
+        this.dataSource = result
       }
-      worker.postMessage('hello')
+      worker.postMessage(this.reactiveForm.value)
     } else {
       // Web Workers are not supported in this environment.
       // You should add a fallback so that your program still executes correctly.
@@ -46,5 +52,6 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     console.log(this.reactiveForm.value)
+    this.getWorkerData()
   }
 }
