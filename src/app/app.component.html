@@ -1,16 +1,66 @@
 <div>
-  <h1>class-transformer demo</h1>
-  <p><i>Type to search a github repository:</i></p>
+  <form class="example-form" [formGroup]="reactiveForm">
 
-  <input #term (keyup)="search(term.value)" />
+    <p>
+      <label for="timer">Timer , ms</label>
+      <input type="text" id="timer" name="timer" formControlName="timer">
+    </p>
 
-  <!-- {{tableResult}}
+    <p>
+      <label for="arraySize">Array Size</label>
+      <input type="text" id="arraySize" name="arraySize" formControlName="arraySize">
+    </p>
 
-  <div *ngIf="tableResult">
-    <h2>Checkout console to see transformed result. Pay attention on object types</h2>
-  </div>
+    <p>
+      <label for="id">Additional array ids</label>
+      <input type="text" id="id" name="id" formControlName="id">
+    </p>
 
-  <ul *ngIf="tableResult">
-    <li *ngFor="let url of tableResult.repositoryUrls">{{url}}</li>
-  </ul> -->
+
+
+  </form>
 </div>
+
+<div *ngIf="dataSource">
+  <table mat-table [dataSource]="dataSource.child" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Int Column -->
+    <ng-container matColumnDef="int">
+      <th mat-header-cell *matHeaderCellDef> Int </th>
+      <td mat-cell *matCellDef="let element"> {{element.int}} </td>
+    </ng-container>
+
+    <!-- Float Column -->
+    <ng-container matColumnDef="float">
+      <th mat-header-cell *matHeaderCellDef> Float </th>
+      <td mat-cell *matCellDef="let element"> {{element.float}} </td>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef> Color </th>
+      <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+    </ng-container>
+
+    <!-- Child Column -->
+    <ng-container matColumnDef="child">
+      <th mat-header-cell *matHeaderCellDef> Child </th>
+      <td mat-cell *matCellDef="let element"> {{element.child.id}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.child.color}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<router-outlet></router-outlet>
