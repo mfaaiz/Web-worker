@@ -17,10 +17,10 @@ export class AppComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'int', 'float', 'color', 'child']
   dataSource: Table
-  showTable: boolean
+  showTable: boolean = false
 
   ngOnInit() {
-    this.showTable = false
+    // receive data from web-worker
     this.getWorkerData()
   }
 
@@ -30,10 +30,12 @@ export class AppComponent implements OnInit {
       const worker = new Worker('./app.worker', { type: 'module' })
       worker.onmessage = ({ data }) => {
         this.showTable = true
+        //transform response data(raw) to class
         let users = plainToClass(Table, data)
-        console.log('typeOfusers', typeof users)
-        this.dataSource = users['result']
         console.log(users)
+
+        //set table data to render on UI
+        this.dataSource = users
       }
       worker.postMessage('hello')
     } else {
