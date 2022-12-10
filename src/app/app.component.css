@@ -3,6 +3,7 @@
   display: flex;
   flex-flow: row wrap;
   align-items: center;
+  margin: 20px;
 }
 
 /* Add some margins for each label */
@@ -33,23 +34,30 @@
 
 .border {
   border: 1px solid black;
-  width: 80%;
-  margin: 20px;
+  width: 70%;
+  margin: 60px;
 }
 
-table,
-form {
-  margin: 20px;
+table {
+  margin: 40px;
   width: 90%;
+  height: 50%;
+  overflow: auto;
+  text-align: center;
 }
 th {
-  background-color: azure;
+  background-color: white;
   height: 30px;
   color: black;
+  text-align: center;
+}
+
+th.mat-header-cell {
+  text-align: center;
 }
 
 td {
   border: 1px solid black;
-  background-color: beige;
+  background-color: white;
   color: black;
 }

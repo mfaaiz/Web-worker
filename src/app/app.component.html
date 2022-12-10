@@ -43,7 +43,8 @@
     <!-- Color Column -->
     <ng-container matColumnDef="color">
       <th mat-header-cell *matHeaderCellDef> Color </th>
-      <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+      <td [ngStyle]="{'background-color': element.color}" mat-cell *matCellDef="let element">
+        {{element.color}} </td>
     </ng-container>
 
     <!-- Child Column -->
