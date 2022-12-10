@@ -17,8 +17,10 @@ export class AppComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'int', 'float', 'color', 'child']
   dataSource: Table
+  showTable: boolean
 
   ngOnInit() {
+    this.showTable = false
     this.getWorkerData()
   }
 
@@ -27,8 +29,10 @@ export class AppComponent implements OnInit {
       // Create a new
       const worker = new Worker('./app.worker', { type: 'module' })
       worker.onmessage = ({ data }) => {
+        this.showTable = true
         let users = plainToClass(Table, data)
-        this.dataSource = users
+        console.log('typeOfusers', typeof users)
+        this.dataSource = users['result']
         console.log(users)
       }
       worker.postMessage('hello')
@@ -36,5 +40,9 @@ export class AppComponent implements OnInit {
       // Web Workers are not supported in this environment.
       // You should add a fallback so that your program still executes correctly.
     }
+  }
+
+  onSubmit() {
+    console.log(this.reactiveForm.value)
   }
 }

@@ -1,28 +1,23 @@
-<div>
-  <form class="example-form" [formGroup]="reactiveForm">
-
+<div class="border">
+  <form class="form-inline" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
     <p>
       <label for="timer">Timer , ms</label>
       <input type="text" id="timer" name="timer" formControlName="timer">
     </p>
-
     <p>
       <label for="arraySize">Array Size</label>
       <input type="text" id="arraySize" name="arraySize" formControlName="arraySize">
     </p>
-
     <p>
       <label for="id">Additional array ids</label>
       <input type="text" id="id" name="id" formControlName="id">
     </p>
-
-
-
+    <button>Submit</button>
   </form>
 </div>
 
-<div *ngIf="dataSource">
-  <table mat-table [dataSource]="dataSource.child" class="mat-elevation-z8">
+<div *ngIf="showTable" class="border">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->

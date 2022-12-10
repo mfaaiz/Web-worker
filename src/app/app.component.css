@@ -1,13 +1,55 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
-  
-table{
-  width: 100%;
+/* Style the form - display items horizontally */
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+/* Add some margins for each label */
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+/* Style the input fields */
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+/* Style the submit button */
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+.border {
+  border: 1px solid black;
+  width: 80%;
+  margin: 20px;
+}
+
+table,
+form {
+  margin: 20px;
+  width: 90%;
+}
+th {
+  background-color: azure;
+  height: 30px;
+  color: black;
+}
+
+td {
+  border: 1px solid black;
+  background-color: beige;
+  color: black;
 }
