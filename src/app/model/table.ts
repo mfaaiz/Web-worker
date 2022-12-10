@@ -8,12 +8,4 @@ export class Table {
   color: string
   @Type(() => Child)
   child: Child
-
-  constructor(param: Table) {
-    this.id = param.id
-    this.int = param.int
-    this.float = param.float
-    this.color = param.color
-    this.child = param.child
-  }
 }
